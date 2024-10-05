@@ -1,2 +1,0 @@
-# gogumarket
-gogumarket team-project
