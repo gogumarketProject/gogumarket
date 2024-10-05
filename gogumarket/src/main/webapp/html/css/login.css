@@ -1,0 +1,96 @@
+@charset "UTF-8";
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10%; /* 로고와 상단의 간격 조정 */
+    margin-bottom: -12%; /* 로고와 로그인 박스 사이의 간격을 줄임 */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    flex-direction: column; /* 위아래 정렬 */
+}
+
+.login-box {
+    background-color: white;
+    width: 420px;
+    height: 550px;
+    padding: 40px;
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.login-box p {
+    font-size: 18px;
+    margin-bottom: 200px;
+}
+
+/* 버튼 내부 아이콘과 텍스트 정렬 */
+.login-box button {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 텍스트를 가운데 정렬 */
+    position: relative;
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    text-align: center; /* 버튼 내부 텍스트 중앙 정렬 */
+}
+
+/* 아이콘을 버튼의 왼쪽에 고정 */
+.login-box button i {
+    position: absolute;
+    left: 15px; /* 버튼의 왼쪽에서 아이콘 위치 조정 */
+}
+
+.login-box .google-btn {
+    background-color: #5e4bc9;
+    color: white;
+}
+
+.naver-btn {
+    background-color: #03C75A;
+}
+
+.login-box .kakao-btn {
+    background-color: #fee500;
+    color: #3c1e1e;
+}
+
+.login-box .phone-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+}
+
+.login-box .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 30px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.login-box .checkbox input {
+    margin-right: 5px;
+}
+
+.login-box small {
+    color: gray;
+}

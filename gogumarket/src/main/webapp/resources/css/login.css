@@ -1,0 +1,104 @@
+@charset "UTF-8";
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f5f5;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px; /* 로고와 상단의 간격 조정 */
+    margin-bottom: -30px; /* 로고와 로그인 박스 사이의 간격 조정 */
+}
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto; /* 로그인 박스의 높이를 컨텐츠에 맞추기 위해 auto로 설정 */
+    flex-direction: column;
+    margin-top: 20px; /* 로그인 박스를 아래로 이동 */
+    margin-bottom: 100px; /* 푸터와의 간격을 확보하기 위해 추가 */
+}
+
+.login-box {
+    background-color: white;
+    width: 420px;
+    padding: 80px 40px 60px; /* 상단 패딩을 80px로 늘리고 하단 패딩을 60px로 설정 */
+    border-radius: 25px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+    min-height: 600px; /* 높이를 늘려서 박스가 충분히 커지도록 수정 */
+    margin-top: 30px; /* 로고와 로그인 박스 사이의 간격 설정 */
+}
+
+.login-box p {
+    font-size: 20px;
+    margin-bottom: 40px; /* 설명 텍스트와 로그인 폼 간의 간격을 충분히 확보하도록 설정 */
+    margin-top: 0px; /* 텍스트와 상단 간격을 충분히 주어 요소가 겹치지 않도록 함 */
+}
+
+.login-box .input-fields {
+    margin-bottom: 30px; /* 입력란과 로그인 버튼 사이의 간격을 늘려서 겹치지 않도록 조정 */
+}
+
+.login-box button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    margin-bottom: 15px; /* 각 버튼 사이의 간격을 늘림 */
+    cursor: pointer;
+    text-align: center;
+}
+
+.login-box button i {
+    position: absolute;
+    left: 15px;
+}
+
+.login-box .google-btn {
+    background-color: #5e4bc9;
+    color: white;
+}
+
+.naver-btn {
+    background-color: #03C75A;
+}
+
+.login-box .kakao-btn {
+    background-color: #fee500;
+    color: #3c1e1e;
+}
+
+.login-box .phone-btn {
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+}
+
+.login-box .checkbox {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-top: 30px; /* 체크박스와 위의 요소들 사이의 간격을 늘림 */
+    font-size: 14px;
+}
+
+.login-box .checkbox input {
+    margin-right: 5px;
+}
+
+.login-box small {
+    color: gray;
+    margin-top: 10px; /* 체크박스 아래 설명 텍스트와의 간격 추가 */
+    display: block;
+}

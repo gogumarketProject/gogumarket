@@ -1,4 +1,4 @@
-package com.kr.gogumarket;
+package com.kr.goguma;
 
 import java.text.DateFormat;
 import java.util.Date;

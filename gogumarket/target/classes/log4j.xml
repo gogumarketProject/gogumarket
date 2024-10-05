@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.kr.gogumarket">
+	<logger name="com.kr.goguma">
 		<level value="info" />
 	</logger>
 	
