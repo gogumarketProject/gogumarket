@@ -1,0 +1,548 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>고구마켓</title>
+    
+    <!-- 폰트어썸 -->
+    <script src="https://kit.fontawesome.com/cbbeedc0db.js" crossorigin="anonymous"></script>
+    <!-- ... -->
+    
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/write_form.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
+
+</head>
+	<script>
+		function goUpload(){
+			// 이미지 파일 input을 찾습니다.
+		    const imageInput = document.querySelector('input[name="product-images"]');
+		 	
+			// 파일이 없는 경우 경고 메시지 표시
+		    if (!imageInput.files || imageInput.files.length === 0) {
+		        alert("사진을 1장 이상 등록해 주세요.");
+		        return;
+		    }
+			
+			//상품명 기재 안 한 경우 경고
+		    const productName = document.querySelector('input[name="product-name"]');
+		    if (!productName.value) {
+		        alert("상품명을 기재해 주세요.");
+		        productName.focus();
+		        return;
+		    }
+		    
+		    // 선택된 카테고리가 있는지 확인
+		    const selectedCategories = document.querySelectorAll('#selected-category-display div'); // 선택된 카테고리들이 들어가는 곳
+		    if (selectedCategories.length === 0) {
+		        alert("카테고리를 선택해 주세요.");
+		        return;
+		    }
+		    
+			 // 무료나눔 체크박스가 체크되어 있는지 확인
+		    const forFreeCheckbox = document.querySelector('input[name="for-free"]');
+		    if (!forFreeCheckbox.checked) { 
+		        // 무료나눔이 아닐 때만 가격 확인
+			    const productPrice = document.querySelector('input[name="product-price"]');
+			    if (!productPrice.value) {
+			        alert("가격을 입력해 주세요.");
+			        productPrice.focus();
+			        return;
+			    }
+			}
+		    
+		 	//상품 정보를 기재 안 한 경우 경고
+		    const productDetails = document.querySelector('textarea[name="product-details"]');
+		    if (productDetails.value.length < 3) {
+		        alert("상세 정보를 3자 이상 입력해 주세요.");
+		        productDetails.focus();
+		        return;
+		    }
+		    
+			 // 상품 상태가 선택되지 않은 경우 경고
+		    const productState = document.querySelector('input[name="product-state"]:checked');
+		    if (!productState) {
+		        alert("상품 상태를 선택해 주세요.");
+		        return;
+		    }
+
+		    // 거래 방법이 선택되지 않은 경우 경고
+		    const deliveryMethod = document.querySelector('input[name="trade-method"]:checked');
+		    if (!deliveryMethod) {
+		        alert("거래 방법을 선택해 주세요.");
+		        return;
+		    }
+		    
+		 	// 직거래를 선택한 경우 직거래 위치가 입력되었는지 확인
+	        const meetCheckbox = document.querySelector('input[name="trade-method"][value="meet"]');
+	        const meetLocation = document.querySelector('input[name="meet-location"]');
+	        if (meetCheckbox.checked) {
+	            if (!meetLocation.value) {
+	                alert("직거래 위치를 입력해 주세요.");
+	                meetLocation.focus();
+	                return;
+	            }
+
+	            // 직거래 위치를 입력했지만 "확인" 버튼을 누르지 않았을 경우 경고
+	            if (!locationConfirmed) {
+	                alert("직거래 위치를 확인해 주세요.");
+	                return;
+	            }
+	        }
+	        
+	        sell.t_gubun.value = "upload";  // t_gubun 값에 'upload' 설정
+
+	        /* alert(imageInput.value);
+	        alert(selectedCategories.value);
+	        alert(selectedCategories.length);
+	        alert(forFreeCheckbox.value);
+	        alert(productState.value);
+	        alert(sell.meet-location.value);
+	        alert(sell.t_gubun.value); */
+	        
+	        // 유효성 검사 통과 후 폼 제출 처리
+	        sell.method = "post";
+	        sell.action = "Goguma";
+	        sell.submit();
+		}
+	</script>
+<body>
+    <%@include file="header.jsp" %>
+	<%@include file="menu_bar.jsp" %>
+	<%@include file="message.jsp" %>
+    
+<main>
+        <input type="hidden" name="t_gubun">
+        <div class="container">
+	  	<form name="sell" enctype="multipart/form-data">
+            <!-- 이미지 업로드 박스와 미리 보기 컨테이너를 묶음 -->
+			<div class="upload-preview-container">
+			    <!-- 이미지 업로드 박스 -->
+			    <div class="upload-box">
+			        <span class="upload-text">사진을 업로드 해주세요 (0/3)</span>
+			        <input type="file" name="product-images" multiple accept="image/*">
+			    </div>
+			    <!-- 이미지 미리 보기 영역 -->
+			    <div class="preview-container"></div>
+			</div>
+
+            <!-- 상품명 입력 -->
+            <div class="input-box">
+                <input type="text" name="product-name" placeholder="상품명">
+            </div>
+            
+            <!-- 선택한 카테고리 출력 -->
+			<div class="input-box selected-category-display">
+			    <div id="selected-category-display"></div>
+			    <!-- 선택한 카테고리를 숨겨진 input 필드로 저장 -->
+	            <input type="hidden" name="selected-categories" id="selected-categories">
+			</div>
+
+
+            <!-- 카테고리 선택 -->
+            <div class="category-container">
+                <div class="category-box" data-value="fashion-clothing">패션의류</div>
+                <div class="category-box" data-value="fashion-accessories">패션잡화</div>
+                <div class="category-box" data-value="bag">가방/핸드백</div>
+                <div class="category-box" data-value="watch-jewelry">시계/쥬얼리</div>
+                <div class="category-box" data-value="electronics">가전제품</div>
+                <div class="category-box" data-value="mobile-tablet">모바일/태블릿</div>
+                <div class="category-box" data-value="laptop-pc">노트북/PC</div>
+                <div class="category-box" data-value="game">게임</div>
+                <div class="category-box" data-value="furniture-interior">가구/인테리어</div>
+                <div class="category-box" data-value="free-gift" id="free-gift-category">무료나눔</div>
+            </div>
+            <div id="subcategory-container" class="category-container"></div>
+			
+            <div class="price-box">
+                <input type="text" name="product-price" id="product-price" placeholder="판매가격" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+			    <div class="free-gift-container">
+			        <input type="checkbox" name="for-free" id="free-gift" name="option" value="free-gift" style="display:none;">
+			        <label for="free-gift" class="round-checkbox" id="free-gift-label"></label>
+			        <span class="label-text" id="free-gift-text">무료나눔</span>
+			    </div>
+            </div>
+
+            <!-- 상세 정보 입력 -->
+            <div class="input-box">
+                <textarea class="detail-box" name="product-details" placeholder="
+    -상품명(브랜드)
+    -구매 시기
+    -오염 여부
+    -하자 여부
+    *실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
+    "></textarea>
+            </div>
+
+            <!-- 상품 상태 선택 -->
+            <div class="radio-container">
+                <input type="radio" id="option1" name="product-state" value="1">
+                <label for="option1" class="radio-box">중고</label>
+                
+                <input type="radio" id="option2" name="product-state" value="2">
+                <label for="option2" class="radio-box">새상품</label>
+            </div>
+
+            <!-- 거래 방법 선택 -->
+            <div class="checkbox-container">
+                <input type="checkbox" id="delivery" name="trade-method" value="delivery">
+                <label for="delivery" class="round-checkbox"></label>
+                <span class="label-text">택배</span>
+                
+                <input type="checkbox" id="meet" name="trade-method" value="meet">
+                <label for="meet" class="round-checkbox"></label>
+                <span class="label-text">직거래</span>
+                
+			    <div id="meetLocationContainer" style="margin-left: 15px; display: none;">
+				    <input type="text" name="meet-location" id="meetLocation" placeholder="직거래 위치 입력" style="padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
+				    <button id="locationConfirmButton" style="width: 30px; border: 1px solid #ddd; height: 100%;">확인</button>
+				</div>
+				<!-- 입력된 위치가 여기에 출력됩니다 -->
+				<div id="locationOutput"></div>
+            </div>
+
+            <!-- 체크박스 아래에 "등록" 박스 추가 -->
+            <div class="register-box" onclick="goUpload()">
+                등록
+            </div>
+		    </form>
+        </div>
+</main>
+    
+    <%@include file="footer.jsp" %>
+
+ <script>
+//이미지 업로드 개수 카운트 및 미리 보기
+ const uploadBox = document.querySelector('.upload-box');
+ const uploadText = document.querySelector('.upload-text');
+ const uploadInput = uploadBox.querySelector('input');
+ const previewContainer = document.querySelector('.preview-container'); // 미리 보기 영역
+ let uploadedFiles = []; // 업로드한 파일들을 저장하는 배열
+ let fileIdCounter = 0; // 각 파일에 고유 ID를 부여하기 위한 카운터
+
+ // 이미지 업로드 시 처리
+ uploadInput.addEventListener('change', () => {
+     const files = Array.from(uploadInput.files); // 파일 리스트를 배열로 변환
+
+     // 새로 선택한 파일에 고유 ID 부여 및 업로드된 파일 목록에 추가 (최대 3장)
+     files.forEach((file) => {
+         uploadedFiles.push({ id: fileIdCounter++, file });
+     });
+
+     uploadedFiles = uploadedFiles.slice(0, 3); // 최대 3장까지만 허용
+
+     // 파일 수를 업로드 텍스트에 표시
+     uploadText.textContent = `사진을 업로드 해주세요 (${uploadedFiles.length}/3)`;
+
+     // 미리 보기 갱신
+     renderPreviews();
+
+     // 업로드 제한이 3장을 넘으면 더 이상 추가하지 않도록 설정
+     if (uploadedFiles.length >= 3) {
+         uploadInput.disabled = true; // 더 이상 파일 선택 불가
+     }
+ });
+
+ // 미리 보기 및 삭제 버튼 렌더링 함수
+ function renderPreviews() {
+     // 미리 보기 영역 초기화
+     previewContainer.innerHTML = '';
+
+     uploadedFiles.forEach(({ id, file }) => {
+         const reader = new FileReader();
+
+         // 파일이 로드된 후 미리 보기 생성
+         reader.onload = (e) => {
+             const previewDiv = document.createElement('div');
+             previewDiv.classList.add('preview-item');
+             previewDiv.style.position = 'relative';
+             
+
+             const img = document.createElement('img');
+             img.src = e.target.result;
+             img.classList.add('preview-image');
+
+             const removeButton = document.createElement('button');
+             removeButton.textContent = '삭제';
+             removeButton.classList.add('remove-button');
+             removeButton.onclick = () => removeFile(id); // 삭제 버튼 클릭 시 파일 삭제
+
+             previewDiv.appendChild(img);
+             previewDiv.appendChild(removeButton);
+             previewContainer.appendChild(previewDiv);
+         };
+
+         // 이미지 파일 읽기
+         reader.readAsDataURL(file);
+     });
+
+     // 파일 수를 다시 표시 (제거 후에도 정확하게 카운트)
+     uploadText.textContent = `사진을 업로드 해주세요 (${uploadedFiles.length}/3)`;
+
+     // 파일 수가 3장 미만일 때 업로드 활성화
+     if (uploadedFiles.length < 3) {
+         uploadInput.disabled = false;
+     }
+ }
+
+ // 파일 삭제 함수
+ function removeFile(id) {
+     // 파일 목록에서 해당 ID를 가진 파일 제거
+     uploadedFiles = uploadedFiles.filter((file) => file.id !== id);
+
+     // 미리 보기 갱신
+     renderPreviews();
+ }
+
+ 
+	//카테고리 및 하위 카테고리 데이터
+	 const categories = {
+			 'fashion-clothing': ['여성의류', '남성의류'],
+			    'fashion-accessories': ['모자', '넥타이'],
+			    'electronics': [], // 하위 카테고리 없음
+			    'bag': [], // 추가적으로 하위 카테고리가 없는 카테고리 처리
+			    'watch-jewelry': [], 
+			    'mobile-tablet': [],
+			    'laptop-pc': [],
+			    'game': [],
+			    'furniture-interior': [],
+	 };
+	
+	 const freeGiftCheckbox = document.getElementById('free-gift');
+	 const freeGiftLabel = document.getElementById('free-gift-label');
+	 const productPriceInput = document.getElementById('product-price');
+	 const selectedCategoryDisplay = document.getElementById('selected-category-display');
+	 let selectedCategories = [];
+	 let selectedCategory = '';
+	 let selectedSubcategory = '';
+	
+	 // 카테고리 선택 처리 함수
+	 function selectCategory(category, subcategory = null) {
+	     if (selectedCategories.length >= 3) {
+	         alert("최대 3개의 카테고리만 선택 가능합니다.");
+	         return;
+	     }
+	
+	     // 카테고리와 하위 카테고리 처리
+	     let displayCategory = subcategory ? `${category}/${subcategory}` : category;
+	
+	 	 // 이미 선택한 카테고리인지 확인
+	     if (!selectedCategories.includes(displayCategory)) {
+	         selectedCategories.push(displayCategory);
+	         renderSelectedCategories();
+	         updateHiddenInput(); // 숨겨진 input에 선택한 카테고리 저장
+	     }
+	 }
+ 
+	//선택한 카테고리 업데이트
+	 function updateHiddenInput() {
+	     selectedCategoriesInput.value = selectedCategories.join(', ');  // 배열을 문자열로 변환
+	 }
+
+ // 선택된 카테고리 삭제 함수
+ function removeCategory(index) {
+     selectedCategories.splice(index, 1); // 해당 인덱스의 카테고리를 삭제
+     renderSelectedCategories();
+ }
+
+ // 선택된 카테고리 출력 및 삭제 버튼 추가
+ function renderSelectedCategories() {
+     const displayContainer = document.getElementById("selected-category-display");
+     displayContainer.innerHTML = ""; // 기존 출력 초기화
+
+     selectedCategories.forEach((category, index) => {
+         const categoryElement = document.createElement("div");
+         categoryElement.innerHTML = `${category} <span class="remove-category" onclick="removeCategory(${index})">[삭제]</span>`;
+         displayContainer.appendChild(categoryElement);
+     });
+ }
+ 
+//무료나눔 체크박스 활성화와 가격 입력 필드 비활성화 로직
+ document.addEventListener("DOMContentLoaded", function () {
+     const freeGiftCategory = document.getElementById("free-gift-category");
+     const freeGiftCheckbox = document.getElementById("free-gift");
+     const freeGiftLabel = document.getElementById("free-gift-label");
+     const productPriceInput = document.getElementById("product-price");
+
+     // 무료나눔 카테고리 클릭 시 체크박스 활성화 및 가격 비활성화
+     freeGiftCategory.addEventListener("click", function () {
+         freeGiftCheckbox.checked = !freeGiftCheckbox.checked;
+
+         if (freeGiftCheckbox.checked) {
+             disableProductPrice();
+             updateFreeGiftStyle(true);
+         } else {
+             enableProductPrice();
+             updateFreeGiftStyle(false);
+         }
+     });
+
+     function disableProductPrice() {
+         productPriceInput.value = '';
+         productPriceInput.disabled = true;
+     }
+
+     function enableProductPrice() {
+         productPriceInput.disabled = false;
+     }
+
+     function updateFreeGiftStyle(isChecked) {
+         if (isChecked) {
+             freeGiftLabel.style.backgroundColor = '#a3fd85';
+             freeGiftLabel.innerHTML = '✔';
+         } else {
+             freeGiftLabel.style.backgroundColor = '';
+             freeGiftLabel.innerHTML = '';
+         }
+     }
+ });
+ 
+ // 카테고리 클릭 시 하위 카테고리 표시 및 선택 처리
+ document.querySelectorAll('.category-box').forEach(categoryBox => {
+     categoryBox.addEventListener('click', function () {
+         const categoryValue = this.getAttribute('data-value');
+         selectedCategory = this.innerText;
+         selectedSubcategory = '';
+
+         // 하위 카테고리 표시
+         const subcategoryContainer = document.getElementById('subcategory-container');
+         subcategoryContainer.innerHTML = '';
+
+         if (categories[categoryValue].length > 0) {
+             categories[categoryValue].forEach(sub => {
+                 const subCategoryDiv = document.createElement('div');
+                 subCategoryDiv.className = 'subcategory-box';
+                 subCategoryDiv.innerText = sub;
+                 subCategoryDiv.setAttribute('data-value', sub);
+
+                 // 하위 카테고리 선택 시 처리
+                 subCategoryDiv.addEventListener('click', function () {
+                     selectedSubcategory = this.innerText;
+                     selectCategory(selectedCategory, selectedSubcategory);
+                 });
+
+                 subcategoryContainer.appendChild(subCategoryDiv);
+             });
+             
+         	 // 하위 카테고리가 있을 때만 active 클래스 추가
+             subcategoryContainer.classList.add('active');
+         } else {
+        	 // 하위 카테고리가 없는 경우 active 클래스를 제거하고 카테고리만 출력
+             subcategoryContainer.classList.remove('active');
+             // 하위 카테고리가 없는 경우 바로 카테고리만 표시
+             selectCategory(selectedCategory);
+         }
+
+         // 무료나눔 선택 처리
+         if (categoryValue === 'free-gift') {
+             freeGiftCheckbox.checked = true;
+             disableProductPrice();
+             updateFreeGiftStyle(true);
+         } else {
+             freeGiftCheckbox.checked = false;
+             enableProductPrice();
+             updateFreeGiftStyle(false);
+         }
+     });
+ });
+
+ // 가격 입력 비활성화 함수
+ function disableProductPrice() {
+     productPriceInput.value = '';
+     productPriceInput.disabled = true;
+ }
+
+ // 가격 입력 활성화 함수
+ function enableProductPrice() {
+     productPriceInput.disabled = false;
+ }
+
+ // 무료나눔 스타일 업데이트 함수
+ function updateFreeGiftStyle(isChecked) {
+     if (isChecked) {
+         freeGiftLabel.style.backgroundColor = '#a3fd85';
+         freeGiftLabel.innerHTML = '✔';
+     } else {
+         freeGiftLabel.style.backgroundColor = '';
+         freeGiftLabel.innerHTML = '';
+     }
+ }
+
+
+
+ // 가격 입력 비활성화
+ function disableProductPrice() {
+     productPriceInput.value = '';
+     productPriceInput.disabled = true;
+ }
+
+ // 가격 입력 활성화
+ function enableProductPrice() {
+     productPriceInput.disabled = false;
+ }
+
+ // 무료나눔 체크박스 클릭 시 처리
+ freeGiftCheckbox.addEventListener('change', function () {
+     if (freeGiftCheckbox.checked) {
+         disableProductPrice();
+         updateFreeGiftStyle(true);
+     } else {
+         enableProductPrice();
+         updateFreeGiftStyle(false);
+     }
+ });
+
+
+    // 직거래 관련 동적 필드 처리
+    const meetCheckbox = document.getElementById('meet');
+    const meetLocationContainer = document.getElementById('meetLocationContainer');
+
+ 	// 직거래 체크박스 이벤트 처리
+    meetCheckbox.addEventListener('change', function() {
+        if (meetCheckbox.checked) {
+            // 직거래가 체크되면 텍스트 필드를 표시
+            meetLocationContainer.style.display = 'inline-block';
+        } else {
+            // 체크 해제 시 텍스트 필드를 숨기고 입력된 위치와 확인 상태를 초기화
+            meetLocationContainer.style.display = 'none';
+            document.getElementById('meetLocation').value = ''; // 입력 필드 초기화
+            document.getElementById('locationOutput').innerHTML = ''; // 출력된 위치 초기화
+            locationConfirmed = false; // 확인 상태 초기화
+        }
+    });
+	
+ 	// "확인" 버튼 클릭 시 이벤트 처리
+    document.getElementById('locationConfirmButton').addEventListener('click', function (event) {
+        event.preventDefault(); // 기본 동작(폼 제출) 방지
+
+        const locationInput = document.getElementById('meetLocation').value;
+
+        if (locationInput) {
+            // 직거래 위치가 입력되었으면 확인 플래그를 true로 설정
+            locationConfirmed = true;
+
+            // 파란색 글씨로 출력하고 삭제 버튼 추가
+            document.getElementById('locationOutput').innerHTML = `
+                <span style="color: blue;">#${locationInput}</span> 
+                <span id="deleteLocation" style="color: red; cursor: pointer;">[삭제]</span>
+            `;
+
+            // 삭제 버튼 클릭 시 입력된 위치 삭제
+            document.getElementById('deleteLocation').addEventListener('click', function () {
+                document.getElementById('locationOutput').innerHTML = ''; // 위치 출력 초기화
+                document.getElementById('meetLocation').value = ''; // 입력 필드 초기화
+                locationConfirmed = false; // 확인 상태 초기화
+            });
+        } else {
+            alert("직거래 위치를 입력하세요."); // 입력값이 없을 때 경고창
+        }
+    });
+
+</script>
+
+
+	<script src="${pageContext.request.contextPath}/resources/js/message.js"></script>
+</body>
+</html>
