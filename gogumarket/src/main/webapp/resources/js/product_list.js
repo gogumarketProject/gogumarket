@@ -150,10 +150,14 @@ function applyPriceFilter() {
     }
 
     // 라디오 버튼 (상품 상태) 필터 추가
-    const productStatus = document.querySelector('input[name="status"]:checked');
-    if (productStatus) {
-        filterText += ` ${productStatus.nextElementSibling.textContent} `;
-    }
+	const productStatusNew = document.getElementById('new');
+	const productStatusUsed = document.getElementById('used');
+	
+	if (productStatusNew.checked) {
+	    filterText += ` ${productStatusNew.nextElementSibling.textContent} `;
+	} else if (productStatusUsed.checked) {
+	    filterText += ` ${productStatusUsed.nextElementSibling.textContent} `;
+	}
 
     // 필터 텍스트 업데이트
     document.getElementById('filter-text').textContent = filterText;
