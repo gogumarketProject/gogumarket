@@ -66,9 +66,9 @@
 	                <td>상품 상태</td>
 	                <td>
 		                <div class="status-filter">
-		                    <input type="radio" id="new" name="status" value="new">
+		                    <input type="radio" id="new" value="new">
 		                    <label for="new">새상품</label>
-		                    <input type="radio" id="used" name="status" value="used">
+		                    <input type="radio" id="used" value="used">
 		                    <label for="used">중고</label>
 		                </div>
 	                </td>
