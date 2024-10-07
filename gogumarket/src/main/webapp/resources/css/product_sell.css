@@ -190,18 +190,18 @@ a:hover {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	display: inline-block;
+	width:100%;
+	text-align: right;
 }
 
 .trade-offer-price{
-	width:94%;
+	width:91%;
 	height:35px;
 	border-radius: 5px;
 	margin: 0 0 0 16px;
 }
 
-.trade-offer-price-submit{
-	
-}
 
 /* 판매자 trade */
 .trade-seller-container {
