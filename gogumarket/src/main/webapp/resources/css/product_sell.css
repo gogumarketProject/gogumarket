@@ -1,16 +1,17 @@
+@charset "UTF-8";
 *{
 	margin:0;
 	background: 0;
 }
 
 a {
-    color: black;       /* 텍스트 색상을 검은색으로 설정 */
-    text-decoration: none; /* 밑줄을 없앰 */
+    color: black;      
+    text-decoration: none; /* 밑줄 제거 */
 }
 
 a:hover {
-    color: black;       /* 링크에 마우스를 올렸을 때도 검은색 유지 */
-    text-decoration: none; /* 마우스를 올렸을 때도 밑줄 없앰 */
+    color: black;       
+    text-decoration: none;
 }
 
 .container {
@@ -33,8 +34,8 @@ a:hover {
 
 .image-box {
   border: 1px solid black;
-  aspect-ratio: 1/1;    /* 정사각형 비율 유지 */
-  overflow: hidden;     /* 이미지가 넘치지 않도록 숨김 */
+  aspect-ratio: 1/1;    
+  overflow: hidden;     
   border-radius: 20px;
 }
 
@@ -77,7 +78,7 @@ a:hover {
   font-size: 12px;
   padding: 0 16px;
   display: flex;
-  flex-direction: column; /* span과 button을 세로로 배치 */
+  flex-direction: column; 
   position: relative;
   align-items: center;
 }
@@ -98,26 +99,26 @@ a:hover {
   content: "";
   position: absolute;
   width: 1px;
-  height: 60%; /* 세로선 높이를 li 요소에 맞춤 */
+  height: 60%; 
   background-color: rgb(230, 230, 230);
   right: 0;
   top: 50%;
   transform: translateY(-50%);
 }
 
-/* 반응형 레이아웃: 화면이 768px 이하로 작아지면 info-box가 image-box 아래로 내려감 */
+/* 반응형 레이아웃 : 768px이하로 작아지면 info-box가 image-box아래로 감 */
 @media (max-width: 1143px) {
   .section1 {
-    flex-direction: column; /* 세로로 배치 */
-    gap: 20px; /* 세로로 나열된 요소 사이의 간격 조정 */
+    flex-direction: column; 
+    gap: 20px; 
   }
 
   .image-box, .info-box {
-    width: 100%; /* 너비 100%로 변경하여 세로 배치 */
+    width: 100%;
   }
 
   .li-details {
-    flex-direction: column; /* 세로로 배치 */
+    flex-direction: column; 
   }
 }
 
@@ -130,22 +131,22 @@ a:hover {
 .trade-location {
   font-size: 12px;
   margin: 0 20px 0 0;
-  line-height: 1; /* 텍스트의 높이를 정확하게 맞추기 위한 line-height */
+  line-height: 1;
   display: flex;
-  align-items: center; /* 텍스트를 중앙에 맞추기 위해 flex 사용 */
+  align-items: center; 
 }
 
 .trade-location-btn {
   font-size: 12px;
   border: none;
-  padding: 0; /* 기본 패딩 제거 */
-  line-height: 1.5; /* 버튼 내부 텍스트 높이 조정 */
+  padding: 0; 
+  line-height: 1.5; 
   background: none;
-  display: inline-flex; /* inline-flex로 텍스트를 중앙에 배치 */
-  align-items: center; /* 버튼 내부 수직 중앙 정렬 */
-  justify-content: center; /* 버튼 내부 수평 중앙 정렬 */
-  height: 24px; /* 버튼 높이 명시적 설정 */
-  vertical-align: middle; /* 수직 가운데 정렬 */
+  display: inline-flex;
+  align-items: center; 
+  justify-content: center;
+  height: 24px;
+  vertical-align: middle; 
 }
 
 .action-buttons {
@@ -161,14 +162,14 @@ a:hover {
 }
 
 .wishlist i {
-  color: #9e9e9e; /* 기본 상태: 회색 */
+  color: #9e9e9e;
 }
 
 .wishlist input:checked + i {
-  font-family: "Font Awesome 6 Free"; /* Font Awesome의 Solid 아이콘을 사용 */
-  font-weight: 900; /* Solid 아이콘은 Font Weight 900 사용 */
-  color: red; /* 체크되면 빨간색으로 변경 */
-  content: '\f004'; /* 채워진 하트 아이콘 */
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900; 
+  color: red; 
+  content: '\f004'; 
 }
 
 .send-msg, .trade-offer{
@@ -198,11 +199,15 @@ a:hover {
 	margin: 0 0 0 16px;
 }
 
+.trade-offer-price-submit{
+	
+}
+
 /* 판매자 trade */
 .trade-seller-container {
 	display: flex;
-	flex-direction: column; /* 세로 정렬 */
-	align-items: center; /* 자식 요소를 중앙 정렬 */
+	flex-direction: column; 
+	align-items: center;
 }
 .trade-seller-line{
 	border-bottom: 2px solid black;
@@ -220,7 +225,7 @@ a:hover {
 	border-bottom: 1px solid gray;
 }
 .trade-seller:last-child {
-  border-bottom: none; /* 마지막 요소는 border 제거 */
+  border-bottom: none; 
 }
 .trade-seller-left{
 	font-size: 14px;
@@ -240,6 +245,11 @@ a:hover {
 .trade-btn{
 	margin:0 3px;
 	font-size: 12px;
+}
+.trade-overflow{
+	overflow: auto;
+	width:455px;
+	height: 123px;
 }
 
 
@@ -266,9 +276,9 @@ a:hover {
 }
 
 .recommended-products img {
-  width: 120px;  /* 너비를 120px로 고정 */
-  height: 120px; /* 높이를 120px로 고정 */
-  object-fit: cover; /* 이미지를 정사각형 안에 맞춤, 비율 무시 */
+  width: 120px;  
+  height: 120px; 
+  object-fit: cover; 
   border:1px solid black;
   opacity: 2;
 }
@@ -282,10 +292,10 @@ a:hover {
 
 .recommend-products-content a{
 	display: -webkit-box;
-  -webkit-line-clamp: 2; /* 두 줄로 제한 */
+  -webkit-line-clamp: 2; 
   -webkit-box-orient: vertical;
   overflow: hidden;
-  text-overflow: ellipsis; /* 넘치는 텍스트에 말줄임표(...) 표시 */
+  text-overflow: ellipsis;
 }
 
 .recommend-price{
@@ -333,6 +343,7 @@ a:hover {
 
 .left-box-text{
 	padding: 20px 0;
+	white-space:pre-line;
 }
 
 .location-info{
@@ -358,20 +369,20 @@ a:hover {
 
 .counterparty, .right-box-header {
   display: flex;
-  justify-content: space-between; /* 텍스트는 왼쪽, 아이콘은 오른쪽 정렬 */
+  justify-content: space-between; 
   align-items: center;
   font-size: 22px;
   font-weight: 600;
 }
 
 .right-box-header i {
-  position: relative; /* relative로 설정해야 right가 작동함 */
-  right: 7px; /* 아이콘을 오른쪽으로 5px 이동 */
+  position: relative; 
+  right: 7px;
 }
 
 
 .counterparty i{
-  margin-left: auto; /* 아이콘을 자동으로 오른쪽 끝으로 밀기 */
+  margin-left: auto; 
   font-size: 68px;
 }
 
@@ -410,15 +421,15 @@ a:hover {
 .small-box-product-img {
 		border: 1px solid #f1f4f6;
 	border-radius: 6px;
-	aspect-ratio: 1 / 1; /* 정사각형 비율 유지 */
-  	overflow: hidden; /* 넘치는 콘텐츠를 숨김 */
+	aspect-ratio: 1 / 1; 
+  	overflow: hidden; 
   	position: relative;
 }
 
 .small-box-product-img img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* 이미지를 정사각형 div에 맞추되 비율 유지 */
+  object-fit: cover; 
 }
 
 .small-box-content h2{
