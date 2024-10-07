@@ -58,7 +58,7 @@
 				<div class="trade-offer-price-box" style="visibility: hidden;">
 					<div style="width:25px;"></div>
 					<input type="text" class="trade-offer-price" placeholder=" 제안할 금액을 입력하세요.">
-					<button class="trade-offer-price-submit">제안하기</button>
+					<input type="button" class="trade-offer-price trade-offer" value="제안하기" style="margin-top:4px;">
 				</div>
 
 
