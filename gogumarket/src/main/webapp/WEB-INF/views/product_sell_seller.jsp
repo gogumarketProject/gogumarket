@@ -58,50 +58,65 @@
 				
 				<div class="trade-seller-container">
 					<p class="trade-seller-line">가격제안</p>
-					<div class="trade-seller">
-						<div class="trade-seller-left">
-							<p>가렌</p>
-							<p class="trade-counterparty-location">중화제2동</p>
+					<div class="trade-overflow">
+						<div class="trade-seller">
+							<div class="trade-seller-left">
+								<p>가렌</p>
+								<p class="trade-counterparty-location">중화제2동</p>
+							</div>
+							<div class="trade-seller-right">
+								<span class="seller-price"><strong>9500원</strong></span>
+								<label class="trade-seller-msg">
+									<button><i class="fa-regular fa-envelope"></i></button>
+								</label>
+								<button class="trade-btn">수락</button>
+								<button class="trade-btn">거절</button>
+							</div>
 						</div>
-						<div class="trade-seller-right">
-							<span class="seller-price"><strong>9500원</strong></span>
-							<label class="trade-seller-msg">
-								<button><i class="fa-regular fa-envelope"></i></button>
-							</label>
-							<button class="trade-btn">수락</button>
-							<button class="trade-btn">거절</button>
+						<div class="trade-seller">
+							<div class="trade-seller-left">
+								<p>다리우스</p>
+								<p class="trade-counterparty-location">중화짜장동</p>
+							</div>
+							<div class="trade-seller-right">
+								<span class="seller-price"><strong>9300원</strong></span>
+								<label class="trade-seller-msg">
+									<button><i class="fa-regular fa-envelope"></i></button>
+								</label>
+								<button class="trade-btn">수락</button>
+								<button class="trade-btn">거절</button>
+							</div>
 						</div>
-					</div>
-					<div class="trade-seller">
-						<div class="trade-seller-left">
-							<p>다리우스</p>
-							<p class="trade-counterparty-location">중화짜장동</p>
+						<div class="trade-seller">
+							<div class="trade-seller-left">
+								<p>신짜오</p>
+								<p class="trade-counterparty-location">중화짬뽕</p>
+							</div>
+							<div class="trade-seller-right">
+								<span class="seller-price"><strong>999999원</strong></span>
+								<label class="trade-seller-msg">
+									<button><i class="fa-regular fa-envelope"></i></button>
+								</label>
+								<button class="trade-btn">수락</button>
+								<button class="trade-btn">거절</button>
+							</div>
 						</div>
-						<div class="trade-seller-right">
-							<span class="seller-price"><strong>9300원</strong></span>
-							<label class="trade-seller-msg">
-								<button><i class="fa-regular fa-envelope"></i></button>
-							</label>
-							<button class="trade-btn">수락</button>
-							<button class="trade-btn">거절</button>
-						</div>
-					</div>
-					<div class="trade-seller">
-						<div class="trade-seller-left">
-							<p>신짜오</p>
-							<p class="trade-counterparty-location">중화짬뽕</p>
-						</div>
-						<div class="trade-seller-right">
-							<span class="seller-price"><strong>999999원</strong></span>
-							<label class="trade-seller-msg">
-								<button><i class="fa-regular fa-envelope"></i></button>
-							</label>
-							<button class="trade-btn">수락</button>
-							<button class="trade-btn">거절</button>
+						<div class="trade-seller">
+							<div class="trade-seller-left">
+								<p>신짜오</p>
+								<p class="trade-counterparty-location">중화짬뽕</p>
+							</div>
+							<div class="trade-seller-right">
+								<span class="seller-price"><strong>999999원</strong></span>
+								<label class="trade-seller-msg">
+									<button><i class="fa-regular fa-envelope"></i></button>
+								</label>
+								<button class="trade-btn">수락</button>
+								<button class="trade-btn">거절</button>
+							</div>
 						</div>
 					</div>
 				</div>
-
 
 			</div>
 		</div>
