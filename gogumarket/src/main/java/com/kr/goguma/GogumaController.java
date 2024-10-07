@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import common.CommonExecute;
 import member.command.MemberLogin;
+import product.command.UploadSales;
 
 @Controller
 public class GogumaController {
@@ -33,14 +34,16 @@ public class GogumaController {
 		else if(gubun.equals("writeForm")) {
 			viewPage = "write";
 		}
+		//판매등록
+		else if(gubun.equals("upload")) {
+			CommonExecute goguma = new UploadSales();
+			goguma.execute(request);
+			viewPage = "common_alert";
+		}
 		//마이페이지
 		else if(gubun.equals("myPage")) {
 			viewPage = "mypage";
 		}
-		
-		
-		
-		
 		
 		return viewPage;
 	}

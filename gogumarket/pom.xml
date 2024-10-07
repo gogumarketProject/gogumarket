@@ -117,11 +117,32 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- JdbcTemplate 추가  -->
-	    <dependency>
+	    <!-- <dependency>
 	       <groupId>org.springframework</groupId>
 	       <artifactId>spring-jdbc</artifactId>
 	       <version>${org.springframework-version}</version>
-	    </dependency>        
+	    </dependency>    -->
+	    
+	    <!-- https://mvnrepository.com/artifact/com.oracle.database.jdbc/ojdbc6 -->
+		<dependency>
+		    <groupId>com.oracle.database.jdbc</groupId>
+		    <artifactId>ojdbc6</artifactId>
+		    <version>11.2.0.4</version>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/servlets.com/cos -->
+		<dependency>
+		    <groupId>servlets.com</groupId>
+		    <artifactId>cos</artifactId>
+		    <version>05Nov2002</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+		<!-- <dependency>
+		    <groupId>commons-io</groupId>
+		    <artifactId>commons-io</artifactId>
+		    <version>2.17.0</version>
+		</dependency> -->
+		
 	</dependencies>
     <build>
         <plugins>
