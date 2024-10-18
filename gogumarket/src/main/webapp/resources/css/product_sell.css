@@ -4,10 +4,6 @@
 	background: 0;
 }
 
-main{
-	background-color: #f5f5f5;
-}
-
 a {
     color: black;      
     text-decoration: none; /* 밑줄 제거 */
@@ -24,14 +20,15 @@ a:hover {
   margin: 0 auto;
 }
 
+
 /* section 1 */
 .section1 {
   display: flex;
   gap: 61px;
-  padding: 60px 0 67px;
+  padding: 60px 0 52px;
 }
 
-.info-box {
+.image-box, .info-box {
   width: 100%;
 }
 
@@ -40,8 +37,6 @@ a:hover {
   aspect-ratio: 1/1;    
   overflow: hidden;     
   border-radius: 20px;
-  width: 78%;
-  box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.5); 
 }
 
 .image-box img {
@@ -74,7 +69,7 @@ a:hover {
   list-style: none;
   padding: 24px 0;
   margin: 0 0 24px;
-  border: 1px solid #ddd;
+  border: 1px solid rgb(230, 230, 230);
   border-radius: 4px;
 }
 
@@ -157,6 +152,7 @@ a:hover {
 .action-buttons {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .wishlist {
@@ -176,19 +172,16 @@ a:hover {
   content: '\f004'; 
 }
 
-.trade-offer-container{
-	width:91%;
-	height:40px;
+.send-msg, .trade-offer{
+	width:46%;
+	height: 40px;
 	margin: 0 0 0 16px;
 	border-radius: 5px;
-	position: relative;
+	cursor: pointer;
 }
 
 .trade-offer{
-	width:100%;
-	height: 40px;
 	background-color: black;
-	border-radius: 5px;
 	color: #fff;
 }
 
@@ -196,54 +189,17 @@ a:hover {
 	padding: 12px 0 0;
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
+	display: inline-block;
 	width:100%;
 	text-align: right;
-}
-
-.absolute{
-	position: absolute;
-}
-
-.trade-offer-hidden{
-	width:100%;
-	height:100%;
-	display:flex;
-	justify-content:space-between;
-	border-radius: 5px;
-	background-color:black;
-	opacity: 0;
-	transition: opacity 0.3s ease; /* 서서히 전환 */
 }
 
 .trade-offer-price{
-	width:78%;
-	height:100%;
+	width:91%;
+	height:35px;
 	border-radius: 5px;
-	background-color:white; 			/* 예시용 화이트 색상 */
-	font-size: 15px;
-	z-index:11;
-	
-}
-
-.trade-offer-hidden:hover{
-	opacity: 1;
-	transform: translateY(0); /* 원래 위치로 이동 */
-}
-
-.trade-offer-price-submit{
-	border:0;
-	right:0;
-	padding: 0 25px 0 25px;;
-	height: 100%;
-	font-size: 15px;
-	font-weight: 600;
-	color: white; 						/* 예시용 화이트 색상 */
-	background-color: black;
-	text-align: right;
-	border-radius: 5px;
-	z-index: 10;
-	cursor: pointer;
+	margin: 0 0 0 16px;
 }
 
 
@@ -260,94 +216,28 @@ a:hover {
 	font-weight: 600;
 	padding: 0 0 4px;
 }
-
-
-
-
-
-
 .trade-seller {
-  padding: 16px 3px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid gray;
-  position: relative; /* trade-options를 absolute로 위치시키기 위해 relative 필요 */
-  overflow: hidden; /* 박스 밖으로 나가는 요소를 숨기기 위해 필요 */
+	width: 94%;
+	padding: 8px 4px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-bottom: 1px solid gray;
 }
-
 .trade-seller:last-child {
   border-bottom: none; 
 }
-
-.trade-seller-left {
-  font-size: 14px;
+.trade-seller-left{
+	font-size: 14px;
 }
-
-.trade-counterparty-location {
-  font-size: 12px;
-  color: gray;
+.trade-counterparty-location{
+	font-size: 12px;
+	color: gray;
 }
-
-.trade-seller-right {
-  display: flex;
-  align-items: center;
+.trade-seller-right{
+	display: flex;
+	align-items: center;
 }
-
-/* 
-@RequestMapping("seller")
-	public String seller() {
-		
-		return "product_sell_seller";
-	}
-	@RequestMapping("consumer")
-	public String consumer() {
-		
-		return "product_sell_consumer";
-	} */
-
-/* 새로 추가된 div의 초기 상태 설정 */
-.trade-options {
-  position: absolute;
-  top: 0;
-  right: 0; /* 오른쪽에 고정 */
-  width: 100%;
-  height: 100%;
-  background-color: white;
-  opacity: 0; /* 처음에는 보이지 않음 */
-  visibility: hidden; /* 요소가 완전히 숨겨짐 */
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  transition: opacity 0.5s ease, visibility 0s 0.7s; /* opacity에 0.7초 속도 적용, visibility는 지연 */
-  z-index: 1;
-  font-size: 26px;
-}
-
-/* hover 시 서서히 나타나도록 설정 */
-.trade-seller:hover .trade-options {
-  opacity: 1; /* 서서히 나타남 */
-  visibility: visible; /* 보이게 설정 */
-  transition: opacity 0.7s ease; /* 서서히 나타나는 속도 0.7초 */
-}
-
-/* 버튼 스타일 */
-.trade-options button {
-  border: none;
-  cursor: pointer;
-  font-size: 14px;
-  transition: transform 0.7s ease; /* 버튼 확대 애니메이션 */
-}
-
-
-
-
-
-
-
-
-
-
 .trade-seller-msg button{
 	border:0;
 	font-size: 18px;
@@ -357,10 +247,9 @@ a:hover {
 	font-size: 12px;
 }
 .trade-overflow{
-	width:100%;
-	height: 335px;
-	padding:0 5px;
 	overflow: auto;
+	width:455px;
+	height: 123px;
 }
 
 
@@ -396,7 +285,7 @@ a:hover {
 
 .recommend-products-content{
 	font-size: 14px;
-	max-width:173px;
+	max-width:193px;
 	margin-left: 12px;
 	height: 136px;
 }
@@ -453,20 +342,12 @@ a:hover {
 }
 
 .left-box-text{
-	padding: 20px 5px 10px;
-	height: 237px;
-	overflow: hidden;
-	white-space: pre-line; /* 줄바꿈 유지 */
-	line-height: 1.5;
-	text-overflow: ellipsis;
-	display: block;
-	padding-bottom: 10px;
+	padding: 20px 0;
+	white-space:pre-line;
 }
 
 .location-info{
 	font-size: 12px;
-	padding:10px 0 120px;
-	position: relative;
 }
 
 .location-info button{
@@ -478,56 +359,12 @@ a:hover {
 	font-size: 12px;
 }
 
-.more{
-	display: none;
-	position: absolute;
-	bottom: 38%;
-	left: 50%;
-	transform: translateX(-50%);
-	color: #020202;
-	border: none;
-	padding: 10px;
-	cursor: pointer;
-}
-
-#toggleButton{
-	border:1.5px solid #020202;
-	width: 70px;
-	height:35px;
-	padding:0;
-	margin:0;
-	border-radius: 30px;
-	letter-spacing: 0.5px;
-	transition: transform 0.5s ease; /* 버튼 확대 애니메이션 */
-	font-weight: bold;
-}
-
-#toggleButton:hover{
-	position: absolute;
-	bottom: 38%;
-	left: 50%;
-	transform: scale(1.1) translateX(-50%);
-	background-color: #020202;
-	color: #fff;
-	font-size: 13px;
-	font-weight: bold;
-}
-
-
-.show-more .left-box-text {
-  height: auto; /* 높이 제한을 제거하여 전체 텍스트 표시 */
-}
-
-.show-more .more {
-  display: block;
-}
-
 .right-box {
 	width:43%;
 }
 
 .right-box-trade{
-	padding : 28px 5px 20px;
+	padding : 28px 0 20px;
 }
 
 .counterparty, .right-box-header {
@@ -613,133 +450,5 @@ a:hover {
 .small-box h2, .small-box div {
   margin-bottom: 10px;
 }
-
-
-
-
-
-/* 쪽지 보내기 슾라이드 패널 CSS */
-/* 기본적으로 패널을 화면 밖에 숨김 */
-.slide-panel {
-  position: fixed;
-  top: 0;
-  right: -500px; /* 패널을 화면 밖으로 숨김 */
-  width: 500px;
-  height: 100%;
-  background-color: #f1f1f1;
-  box-shadow: -3px 0 5px rgba(0,0,0,0.2);
-  transition: right 0.3s ease-in-out; /* 애니메이션 */
-  z-index: 1000; /* 다른 요소 위에 표시 */
-  overflow: hidden;
-}
-
-/* 패널이 열릴 때의 스타일 */
-.slide-panel.open {
-  right: 0; /* 패널을 화면 안으로 슬라이드 */
-}
-
-.msg-close-btn{
-	background: none;
-	border: none;
-	font-size: 24px;
-	cursor: pointer;
-}
-
-.msg-background{
-	padding : 15px;
-	background: #f9f9f9;
-	border-top: 1px solid #ddd;
-	height: 86%;
-}
-
-.msg-container{
-	background-color: #fff;
-	border: 1px solid #ddd;
-	border-radius: 8px;
-	height: 100%;
-}
-
-.msg-counterparty{
-	display: flex;
-	align-items: center;
-	border-bottom: 1px solid #ddd;
-	width:100%;
-	left:0;
-	padding: 15px 20px;
-}
-
-.msg-content{
-	width:100%;
-	top:81px;
-	left:0;
-	padding: 15px;
-	overflow: auto;
-	height: calc(68%);
-	border-bottom: 1px solid #ddd;
-}
-
-.msg-writing-form{
-	padding:15px;
-	width: 100%;
-	min-height: 18%;
-	display: flex;
-	justify-content: space-between;
-}
-
-.msg-writing{
-	width:75%;
-	border: 1px solid #ddd;
-	resize: none;
-}
-
-.msg-send-btn{
-	background-color: black;
-	color:white;
-	font-size : 17px;
-	font-weight:600;
-	letter-spacing:3px;
-	cursor: pointer;
-	padding:0 28px;
-}
-
-/* 
-
-.slide-panel{
-	position: fixed;
-	top: 50%;
-	left: 50%; 
-	width: 450px;
-	height: 295px;
-	background-color: #f1f1f1;
-	box-shadow: -3px 0 5px rgba(0,0,0,0.2);
-	transition: right 0.3s ease-in-out;
-	opacity:0.5;
-	transform : translate(-50%, -50%)
-	z-index: 1000; 
-}
-
-.slide-panel.open {
-	opacity: 1; 
-}
-
-.msg-close-btn{
-	background: none;
-	border: none;
-	font-size: 24px;
-	cursor: pointer;
-}
- */
-
-
-
-
-
-
-
-
-
-
-
-
 
 
