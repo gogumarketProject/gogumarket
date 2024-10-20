@@ -14,178 +14,273 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/common.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/product_sell.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<script type="text/javascript">
+
+	function goUpdate(no){
+		update.s_no.value = no;
+		update.t_gubun.value = "UpdateForm";
+		update.method = "post";
+		update.action = "market";
+		update.submit();
+	}
+	
+	function goDelete(no){
+		if(confirm('삭제된 게시물은 복구할 수 없습니다. \n해당 게시물을 삭제하시겠습니까?')){
+			update.s_no.value = no;
+			update.t_gubun.value = "Delete";
+			update.method = "post";
+			update.action = "market";
+			update.submit();
+		}
+	}
+	/* 찜 추가, 제거 펑션 */ 
+	function OnLikes(){
+		$.ajax({
+  			type:"post",
+  			url :"OnLikes",
+  			data:"s_no="+like.s_no.value,
+  			dataType:"text",
+  			error:function(){
+  				alert("통신 실패!!!!");
+  			},
+  			success:function(data){
+  				var result = $.trim(data);
+  				alert(result);
+  				/* var result = $.trim(data);
+  				  
+  				/* all.t_id_result.value = result;
+  				if(result == "사용가능"){
+  					all.t_id_checkValue.value = all.t_id.value;
+  				}else{
+  					all.t_id_checkValue.value = "";
+  				} */  
+  			}
+  		});
+		
+	}
+	
+</script>
 <body>
 
 	<%@include file="header.jsp" %>
 	<%@include file="menu_bar.jsp" %>
 	<%@include file="message.jsp" %>
+	<%@include file="message_send.jsp" %>
 	
-	<div class="container">
-		<!-- 1번째 섹션 div -->
-		<div class="section1">
-			<!-- 좌측: 사진 div -->
-			<div class="image-box">
-				<img src="이미지경로" alt="상품 이미지">
-			</div>
-			<!-- 우측: 판매 정보 div -->
-			<div class="info-box">
-				<div class="info-box-category">홈 > 도서/음반/문구 > 문구/사무용품</div>
-				<div class="info-box-product-name">슬라이딩 키보드 트레이</div>
-				<div class="info-box-price"><strong>10,000원</strong></div>
-				<div class="info-box-product-meta">34분 전 조회 3 채팅 0 찜 0</div>
-				<!-- 한 줄로 나란히 배치된 li -->
-				<ul class="li-details">
-					<li class="li-line"><span>제품상태</span><button>중고</button></li>
-					<li class="li-line"><span>거래방식</span><button>직거래</button></li>
-					<li class="li-line"><span>배송비</span><button>-</button></li>
-					<li class="li-line"><span>거래제안</span><button>가능</button></li>
-				</ul>
-				<div class="trade">
-					<div class="trade-location">・거래희망지역</div>
-					<div><button class="trade-location-btn">중화제2동</button></div>
-				</div>
-
-
-				<div class="action-buttons">
-					<label class="wishlist">
-						<input type="checkbox" style="display: none;">
-						<i class="fa-regular fa-heart"></i>
-					</label>
-					<button class="send-msg" onclick="alert('쪽지보내기 버튼 클릭됨')">쪽지보내기</button>
-					<button class="trade-offer" onclick="togglePriceBox()">가격제안</button>
-				</div>
-				<div class="trade-offer-price-box" style="visibility: hidden;">
-					<div style="width:25px;"></div>
-					<input type="text" class="trade-offer-price" placeholder=" 제안할 금액을 입력하세요.">
-					<input type="button" class="trade-offer-price trade-offer" value="제안하기" style="margin-top:4px;">
-				</div>
-
-
-			</div>
-		</div>
-
-
-		<!-- 2번째 섹션 div -->
-		<div class="section2">
-			<div class="section2-title">새 상품은 어떠세요?</div>
-			<ul class="recommended-products">
-				<li>
-					<img src="이미지경로" alt="상품 이미지">
-					<div class="recommend-products-content">
-						<a href="#">엘디 엘마운트 슬라이딩 책상 키보드 트레이 APL-KT52 1개 엘디 엘마운트 슬라이딩 책상 키보드 트레이</a>
-						<div class="recommend-price"><strong>36,700원</strong></div>
-						<div class="recommend-advertisy"><span>쿠팡 | 광고</span></div>
+	
+	<main>	
+		<div class="container">
+			<!-- 1번째 섹션 div -->
+			<div class="section1">
+				<!-- 좌측: 사진 div -->
+				<div class="image-box">
+					<img src="${pageContext.request.contextPath}/resources/images/${productdto.getImage_dir() }" alt="product image">
+					<div class="sold-out-container">
+						<span>Sold Out</span>
+						<div class="sold-out-box"></div>
 					</div>
-				</li>
-				<li>
-					<img src="이미지경로" alt="상품 이미지">
-					<div class="recommend-products-content">
-						<a href="#">헬시위드 탈부착 레일형 슬라이딩 키보드 트레이 월넛(상부) + 화이트(하부) 1개</a>
-						<div class="recommend-price"><strong>35,000원</strong></div>
-						<div class="recommend-advertisy"><span>쿠팡 | 광고</span></div>
+				</div>
+				<!-- 우측: 판매 정보 div -->
+				<div class="info-box">
+					<div class="info-box-category">홈 > ${productdto.getCategory_name() }</div>
+					<div style="display: flex; justify-content: space-between;align-items: center; margin: 0 0 6px;">
+						<div class="info-box-product-name">${productdto.getTitle() }</div>
+						<div style="margin-right: 14px;">
+							<c:if test="${id eq productdto.getS_id() }">
+								<div class="selling-circumstances">
+									<div class="selected-circum">판매중</div>
+									<div class="circum-options">
+									  	<input type="hidden" class="circum-value">
+									  	<div class="circum-option circum-1" data-value="1">판매중</div>
+									  	<div class="circum-option circum-2" data-value="2">예약중</div>
+									  	<div class="circum-option circum-3" data-value="3">판매완료</div>
+									</div>
+								</div>
+							</c:if>
+						</div>
 					</div>
-				</li>
-				<li>
-					<img src="이미지경로" alt="상품 이미지">
-					<div class="recommend-products-content">
-						<a href="#">헬시위드 탈부착 레일형 슬라이딩 키보드 트레이 월넛(상부) + 화이트(하부) 1개</a>
-						<div class="recommend-price"><strong>35,000원</strong></div>
-						<div class="recommend-advertisy"><span>쿠팡 | 광고</span></div>
+					<div class="info-box-price"><strong>${productdto.getPrice() }원</strong></div>
+					<div class="info-box-product-meta">${productdto.getReg_date() } | 채팅 0 | 찜 ${productdto.getLikes() }</div>
+					<!-- 한 줄로 나란히 배치된 li -->
+					<ul class="li-details">
+						<li class="li-line"><span>제품상태</span><button>${productdto.getProduct_status() }</button></li>
+						<li class="li-line"><span>거래방식</span><button>${productdto.getTrade() }</button></li>
+						<li class="li-line"><span>거래제안</span><button>가능</button></li>
+					</ul>
+					<c:if test="${productdto.getTrade() eq '직거래' or productdto.getTrade() eq '직거래 | 택배'}">
+					<div class="trade">
+						<div class="trade-location">거래희망지역</div>
+						<button class="trade-location-btn">${productdto.getArea() }</button>
 					</div>
-				</li>
-			</ul>
-		</div>
-
-
-		<!-- 3번째 섹션 div -->
-		<div class="section3">
-			<!-- 좌측 큰 div -->
-			<div class="left-box">
-				<h3 class="left-box-header">상품 정보</h3>
-				<p class="left-box-text">[반값이하, 특가] 키보드 트레이
+					</c:if>
+					<!-- 찜 ajax form -->
+					<form name = "like">
+						<input type = "hidden" name = "s_no" value = "${productdto.getS_no() }"> 
+					</form>
+					<div class="action-buttons">
+					<c:if test="${id != productdto.getS_id() }">
+		               <label class="wishlist">
+		               <!-- 찜 버튼, like 1이면 활성화, 0이면 비활성화-->
+		                  <input type="checkbox" style="display: none;" onclick="if (${sessionId == null}) { alert('로그인 후 이용해주세요.'); goLogin(); } 
+								else { OnLikes(); }" <c:if test="${CheckUserlike eq '1'}">checked</c:if>>
+		                  <i class="fa-regular fa-heart"></i>
+		               </label>
+		               <div class="trade-offer-container ">
+		                  <button class="trade-offer absolute" onclick="togglePriceBox()">가격제안</button>
+		                  <div class="trade-offer-hidden">
+		                     <input type="text" class="trade-offer-price absolute" placeholder="제안할 금액을 입력하세요." oninput="this.value = this.value.replace(/[^0-9]/g, '').replace(/\B(?=(\d{3})+(?!\d))/g, ',');">
+		                     <button class="trade-offer-price-submit absolute" onclick="if(${sessionId == null}) {alert('로그인 후 이용해주세요.'); goLogin();}
+								else { togglePriceBox();}">제안하기</button>
+		                  </div>
+		               </div>
+	               </c:if>
+	            </div>
+						
 					
-					[1] 제품링크
-					[2] 구매시기: 작년 즈음
-					[3] 구매가: 44,000원
-					[4] 제품 설명:
-					--- [1] 화이트 1개 - 상태: 상급
-					기능: 정상기능 작동
-					하자내용: 약간의 사용감
-					가격: 15,000원
-					--- [2] 블랙 1개 - 상태: 중상급
-					기능: 정상기능 작동
-					하자내용: 뒷면에 나사 흔적이 있음
-					가격: 10,000원
-					
-					[⭐⭐ 핫딜 ⭐⭐]
-					2개를 한번에 구매하시면, 20000원에 드립니다.
-					
-					마무리 주의사항
-					네고 없습니다.
-					무조건 직거래로 제가 지정한 장소에서 거래합니다.
-					거래장소는 CU 중화제일점 옆 공원입니다.
-					감사합니다.
-				</p>
-				<div class="location-info">
-					<p>거래희망지역</p>
-					<button>중화제2동</button>
 				</div>
 			</div>
-			<!-- 우측 큰 div -->
-			<div class="right-box">
-				<a href="#">
-					<h3 class="right-box-header">
-						가게 정보
-						<i class="fa-solid fa-chevron-right"></i>
+	
+	
+			
+			
+			<!-- 업데이트 전용 Form -->
+			<form name = "update">
+				<input type = "hidden" name = "s_no">
+				<input type = "hidden" name = "t_gubun">  
+			</form>
+			<!-- 3번째 섹션 div -->
+			<div class="section3">
+				<!-- 좌측 큰 div -->
+				<div class="left-box">
+					<h3 class="left-box-header">
+							상품 정보
+							<c:if test="${id eq productdto.getS_id() }">
+							<div class="left-box-setting-box">
+								<c:if test="${productdto.getStatus() !=  '예약완료'}">
+									<a href="javascript:goUpdate('${productdto.getS_no() }')">
+										수정<i class="fa-regular fa-pen-to-square"></i>
+									</a>
+								</c:if>	
+								<a href="javascript:goDelete('${productdto.getS_no() }')">
+									삭제<i class="fa-regular fa-trash-can"></i>
+								</a>
+							</div>
+						</c:if>	
 					</h3>
-				</a>
-				<div class="right-box-trade">
-					<a href="#">
-						<p class="counterparty">
-							매너거래칼거래
-							<i class="fa-solid fa-circle-user"></i>
-						</p>
-					</a>
-				</div>
-				<div class="counterparty-trust">
-					<p>신뢰지수</p>
-					<span>401</span>
-				</div>
-				<ul class="li-details counterparty-data">
-					<li class="li-line"><span>안전거래</span><button>0</button></li>
-					<li class="li-line"><span>거래후기</span><button>2</button></li>
-					<li class="li-line"><span>단골</span><button>0</button></li>
-				</ul>
-				<div class="product-list">
-					<div class="small-box">
-						<div class="small-box-product-img"><img src="이미지경로" alt="상품 이미지"></div>
-						<div class="small-box-content">
-							<h2>슬라이딩 키보드 트레이</h2>
-							<div class="small-box-price">10,000원</div>
-						</div>
-					</div>
-					<div class="small-box">
-						<div class="small-box-product-img"><img src="이미지경로" alt="상품 이미지"></div>
-						<div class="small-box-content">
-							<h2>mx keys mac 반값 2개</h2>
-							<div class="small-box-price">50,000원</div>
-						</div>
-					</div>
-					<div class="small-box margin-padding-reset">
-						<div class="small-box-product-img"><img src="이미지경로" alt="상품 이미지"></div>
-						<div class="small-box-content">
-							<h2>아이패드 10세대 + 애플 펜슬 1세대 팝니다</h2>
-							<div class="small-box-price">450,000원</div>
+					<div class="left-box-relative" >
+						<p class="left-box-text"  id="leftBoxText">${productdto.getContents() }</p>
+						<div class="location-info">
+							<c:if test="${productdto.getTrade() eq '직거래' or productdto.getTrade() eq '직거래 | 택배'}">
+								<p>거래희망지역</p>
+								<button id="location-info-box"><i class="fa-solid fa-location-dot"></i>${productdto.getArea() }</button>
+							</c:if>	
+							<button class="more" id="toggleButton">더보기</button>
 						</div>
 					</div>
 				</div>
+				<!-- 우측 큰 div -->
+				
+				<c:if test="${id eq productdto.getS_id() }">	
+				<div class="right-box">
+						<h3 class="right-box-header">
+							가격제안
+						</h3>
+					<div class="trade-seller-container">
+						<div class="trade-overflow">
+							<div class="trade-seller">
+								<div class="trade-seller-left">
+									<p>가렌</p>
+									<p class="trade-counterparty-location">중화제2동</p>
+								</div>
+								<div class="trade-seller-right">
+									<span class="seller-price"><strong>9500원</strong></span>
+								</div>
+								<!-- 새로운 div: trade-options -->
+								<button class="trade-options" id="noteButton"><i class="fa-solid fa-comments"></i></button>
+							</div>
+							<div class="trade-seller">
+								<div class="trade-seller-left">
+									<p>다리우스</p>
+									<p class="trade-counterparty-location">중화짜장동</p>
+								</div>
+								<div class="trade-seller-right">
+									<span class="seller-price"><strong>9300원</strong></span>
+								</div>
+							  	<button class="trade-options"><i class="fa-solid fa-comments"></i></button>
+							</div>
+							<div class="trade-seller">
+								<div class="trade-seller-left">
+									<p>신짜오</p>
+									<p class="trade-counterparty-location">중화짬뽕</p>
+								</div>
+								<div class="trade-seller-right">
+									<span class="seller-price"><strong>999999원</strong></span>
+								</div>
+								<button class="trade-options"><i class="fa-solid fa-comments"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:if>
+				<c:if test="${id != productdto.getS_id() }">
+					<div class="right-box">
+						<h3 class="right-box-header">판매자 정보</h3>
+						<div class="right-box-trade">
+							<a href="#">
+								<p class="counterparty">
+									<span>${productdto.getS_id() }</span>
+									<i class="fa-solid fa-circle-user"></i>
+								</p>
+							</a>
+						</div>
+						<div class="trust-score">
+						  	<div class="trust-score-label">신뢰지수 <span class="trust-score-value">74</span></div>
+						  	<div class="trust-bar">
+						    	<div class="trust-bar-inner"></div>
+						    	<div class="trust-bar-value">1,000</div>
+						  	</div>
+						</div>
+
+						<ul class="li-details counterparty-data">
+							<li class="li-line"><span>안전거래</span><button>0</button></li>
+							<li class="li-line"><span>거래후기</span><button>2</button></li>
+							<li class="li-line"><span>단골</span><button>0</button></li>
+						</ul>
+					</div>
+				</c:if>
 			</div>
+			
+			
+			
+			<div class="section2">
+				<div class="section2-title">새 상품은 어떠세요?</div>
+				<ul class="recommended-products">
+					<c:forEach items="${likesDtos}" var="likesDtos">
+					<li>
+						<a href=javascript:goConsumer('${likesDtos.getS_no() }')><img class="section2-img" src="${pageContext.request.contextPath}/resources/images/${likesDtos.getImage_dir() }" alt="product image"></a> <!-- 사진 -->
+						<div class="recommend-products-content">
+							<a href=javascript:goConsumer('${likesDtos.getS_no() }')>${likesDtos.getTitle() }</a> <!-- 제목 누르면 a태그 -->
+							<div class="recommend-price"><strong>${likesDtos.getPrice() }</strong></div> <!-- 가격칸 -->
+							<div class="recommend-advertisy"><span>${likesDtos.getReg_date() } | <!-- 날짜 | 지역 -->
+							<c:choose>
+								<c:when test="${not empty likesDtos.getArea() }">${likesDtos.getArea() }</c:when>
+								<c:when test="${empty likesDtos.getArea() }">택배</c:when>
+							</c:choose>
+						</div>
+					</li>
+					</c:forEach>
+				</ul>
+			</div>
+			<div class="advertising-container">
+            	<img src="${pageContext.request.contextPath}/resources/images/ad/advertising-image4.png" alt="ad">
+            </div>
 		</div>
-	</div>
-	
+	</main>
 	<%@include file="footer.jsp" %>
 	
-</body>
 	<script src="${pageContext.request.contextPath}/resources/js/product_sell.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/js/message.js"></script>
+</body>
 </html>
