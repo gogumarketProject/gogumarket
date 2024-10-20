@@ -67,45 +67,60 @@
 
             <!-- 상세 정보 입력 -->
             <div class="input-box">
-                <textarea class="detail-box" id="product-details" placeholder="
-    -상품명(브랜드)
-    -구매 시기
-    -오염 여부
-    -하자 여부
-    *실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
-                "></textarea>
+                <textarea class="detail-box" id="product-details" placeholder="-상품명(브랜드)
+-구매 시기
+-오염 여부
+-하자 여부
+*실제 촬영한 사진과 함께 상세 정보를 입력해주세요.
+				"></textarea>
             </div>
 
             <!-- 상품 상태 선택 -->
-            <div class="radio-container">
-                <input type="radio" id="option1" value="">
-                <label for="option1" class="radio-box">중고</label>
-                
-                <input type="radio" id="option2" value="">
-                <label for="option2" class="radio-box">새상품</label>
+            <div class="check-con-box">
+            	<span class="check-title">상품상태</span>
+            	<div class="radio-container">
+	                <input type="radio" id="option1" value="">
+	                <label for="option1" class="radio-box">중고</label>
+	                
+	                <input type="radio" id="option2" value="">
+	                <label for="option2" class="radio-box">새상품</label>
+                </div>
             </div>
 
             <!-- 거래 방법 선택 -->
-            <div class="checkbox-container">
-                <input type="checkbox" id="delivery" value="delivery">
-                <label for="delivery" class="round-checkbox"></label>
-                <span class="label-text">택배</span>
-                
-                <input type="checkbox" id="meet" value="meet">
-                <label for="meet" class="round-checkbox"></label>
-                <span class="label-text">직거래</span>
-                
-                <div id="meetLocationContainer" style="margin-left: 15px; display: none;">
-                    <input type="text" id="meetLocation" placeholder="직거래 위치 입력" style="padding: 5px; border: 1px solid #ddd; border-radius: 4px;">
-                    <button id="locationConfirmButton" style="width: 30px; border: 1px solid #ddd; height: 100%;">확인</button>
+            <div class="check-con-box bottom-line">
+            	<span class="check-title">거래방법</span>
+            	<div  class="checkbox-container">
+	                <input type="checkbox" id="delivery" value="delivery">
+	                <label for="delivery" class="round-checkbox"><i class="fa-solid fa-check"></i></label>
+	                <span class="label-text">택배</span>
+	                
+	                <input type="checkbox" id="meet" value="meet">
+	                <label for="meet" class="round-checkbox"><i class="fa-solid fa-check"></i></label>
+	                <span class="label-text">직거래</span>
                 </div>
-                <!-- 입력된 위치가 여기에 출력됩니다 -->
-                <div id="locationOutput"></div>
+                
             </div>
-
+			<div>
+				<div id="meetLocationContainer" style="display: none;">
+					<span class="meetLocation-title">희망 지역</span>
+					<div style="display: flex; align-items: center;">
+						<div class="meetLocation-add-box-con">
+		                    <input type="text" id="meetLocation" placeholder="직거래 위치 입력">
+		                    <button id="locationConfirmButton">추가</button>
+	                    </div>
+	                    <!-- 입력된 위치가 여기에 출력됩니다 -->
+                		<div id="locationOutput">
+                		</div>
+                    </div>
+                </div>
+			</div>
             <!-- 체크박스 아래에 "등록" 박스 추가 -->
             <div class="register-box" onclick="goUpload()">
                 등록
+            </div>
+            <div class="advertising-container">
+            	<img src="${pageContext.request.contextPath}/resources/images/ad/advertising-image4.png" alt="ad">
             </div>
         </form>
     </div>

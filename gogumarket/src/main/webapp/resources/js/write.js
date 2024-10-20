@@ -230,11 +230,12 @@ meetCheckbox.addEventListener('change', function() {
         meetLocationContainer.style.display = 'none';
         document.getElementById('meetLocation').value = ''; // 입력 필드 초기화
         document.getElementById('locationOutput').innerHTML = ''; // 출력된 위치 초기화
-        locationConfirmed = false; // 확인 상태 초기화
+        document.getElementById('locationOutput').style.display = 'none';
+        locationConfirmed = false; // 추가 상태 초기화
     }
 });
 
-// "확인" 버튼 클릭 시 이벤트 처리
+// "추가" 버튼 클릭 시 이벤트 처리
 document.getElementById('locationConfirmButton').addEventListener('click', function (event) {
     event.preventDefault(); // 기본 동작(폼 제출) 방지
 
@@ -246,14 +247,16 @@ document.getElementById('locationConfirmButton').addEventListener('click', funct
 
         // 파란색 글씨로 출력하고 삭제 버튼 추가
         document.getElementById('locationOutput').innerHTML = `
-            <span style="color: blue;">#${locationInput}</span> 
-            <span id="deleteLocation" style="color: red; cursor: pointer;">[삭제]</span>
+        	<span style="color: #878686;"><i class="fa-solid fa-location-dot"></i></span>
+            <span style="color: #878686; margin:0 6px 0 5px;">${locationInput}</span>
+            <span id="deleteLocation" style="color: #878686; cursor: pointer;"><i class="fa-solid fa-xmark"></i></span>
         `;
-
+		document.getElementById('locationOutput').style.display = 'flex';
         // 삭제 버튼 클릭 시 입력된 위치 삭제
         document.getElementById('deleteLocation').addEventListener('click', function () {
             document.getElementById('locationOutput').innerHTML = ''; // 위치 출력 초기화
             document.getElementById('meetLocation').value = ''; // 입력 필드 초기화
+            document.getElementById('locationOutput').style.display = 'none';
             locationConfirmed = false; // 확인 상태 초기화
         });
     } else {

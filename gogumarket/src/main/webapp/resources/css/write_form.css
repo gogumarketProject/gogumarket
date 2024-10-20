@@ -5,6 +5,10 @@
     box-sizing: border-box;
 }
 
+.product-name::placeholder, .price-box input::placeholder, .detail-box::placeholder{
+	color:#969696;
+}
+
 main {
     display: flex;
     justify-content: center;
@@ -17,11 +21,9 @@ main {
 }
 
 .container {
-    max-width: 1000px;
+    max-width: 900px;
     width: 100%;
     padding: 45px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border: 1px solid #ddd;
     margin-top: 30px;
 }
 
@@ -111,10 +113,13 @@ main {
     padding: 15px;
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #f5f5f5;
 }
 
+
+
 .category-container {
-    margin: 0 0 15px 0;
+    margin: 0 0 20px 0;
     float: left;
     width: 33.33%;
     /* 기본 상태에서는 border를 제거 */
@@ -193,6 +198,7 @@ main {
     clear: both;
     display: flex; /* Flexbox 사용 */
     align-items: center; /* 수직 정렬 */
+    margin: 0 0 5px;
 }
 
 /* input 텍스트 상자 내부에 원화 기호 표시 */
@@ -210,16 +216,16 @@ main {
 /* input 박스 스타일 조정 */
 .price-box input {
     flex: 1; /* 남은 공간을 차지 */
-    height: 40px; /* 높이 설정 */
+    height: 50px; /* 높이 설정 */
     padding-left: 50px; /* 입력되는 숫자와 원화 기호 간의 간격을 확보 */
     padding-right: 40px; /* 오른쪽 패딩 확보 */
     border: 1px solid #ddd;
     border-radius: 4px;
+    background-color: #f5f5f5;
 }
 
 /* placeholder 텍스트 스타일 조정 */
 .price-box input::placeholder {
-    color: #aaa;
     text-indent: 0px; /* placeholder를 더 오른쪽으로 이동하여 원화 기호와 간격 확보 */
 }
 
@@ -254,7 +260,6 @@ main {
 
 /* 체크박스가 체크되었을 때 원형 박스 안에 체크 표시 추가 */
 #free-gift:checked + .round-checkbox::after {
-    content: '✔'; /* 체크 표시 문자 */
     display: inline-block;
     font-size: 16px; /* 체크 표시 크기 */
 }
@@ -268,18 +273,32 @@ main {
 
 .detail-box {
     width: 100%;
-    height: 400px;
-    padding: 10px;
+    height: 235px;
+    padding: 17px;
     border: 1px solid #ddd;
     border-radius: 4px;
     margin-bottom: 15px;
     resize: none;
+    background-color: #f5f5f5;
+    line-height: 1.3rem;
+    font-size: 0.875rem;
+}
+
+.check-con-box{
+	padding:24px 0 ;
 }
 
 .radio-container, .checkbox-container {
     display: flex;
     align-items: center;
-    padding: 15px 0;
+    padding: 15px 0 0;
+}
+
+.check-title{
+	display: inline-block;
+	font-size: 16px;
+	font-weight: 600;
+	color:#5A5A5A;
 }
 
 .radio-container div, .checkbox-container div {
@@ -301,14 +320,19 @@ main {
 .radio-box {
     display: inline-block;
     width: 100px;
+    height:46px;
     padding: 10px;
-    margin: 5px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-right: 12px;
+    border: 1px solid black;
+    border-radius: 8px;
     text-align: center;
+    font-weight:600;
     cursor: pointer;
     background-color: #f5f5f5;
     transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* 라벨(박스) 호버 시 색상 변경 */
@@ -318,10 +342,15 @@ main {
 
 /* 라디오 버튼이 체크되었을 때 라벨 스타일 변경 */
 .radio-container input[type="radio"]:checked + .radio-box {
-    background-color: #a0c4ff;
-    border-color: #007bff;
+    background-color: #0dcb5a;
+    border-color: #0dcb5a;
     font-weight: bold;
     color: white;
+}
+
+.bottom-line{
+	padding: 15px 0 35px;
+	border-bottom: 1px solid #ddd;
 }
 
 /* 체크박스 숨기기 */
@@ -336,33 +365,23 @@ main {
     height: 24px;
     border: 2px solid #ddd;
     border-radius: 50%; /* 원형 만들기 */
-    cursor: pointer;
     margin: 0 8px 0 0; /* 원형과 텍스트 간 간격 조정 */
     vertical-align: middle;
     text-align: center; /* 텍스트를 중앙 정렬 */
     line-height: 20px; /* 폰트와 박스의 높이 정렬 */
     font-size: 16px; /* 체크 표시의 크기 */
-    color: transparent; /* 체크되지 않은 상태에서는 텍스트 숨김 */
-    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
-}
-
-/* 체크박스가 체크되지 않은 상태의 스타일 */
-.round-checkbox:hover {
-    border-color: #007bff;
+    color:#b9b9b9;
 }
 
 /* 체크박스가 체크되었을 때 원형 박스 전체 색상 및 체크 표시 */
 .checkbox-container input[type="checkbox"]:checked + .round-checkbox {
-    background-color: #007bff; /* 배경색 */
-    border-color: #007bff; /* 테두리 색 */
+    background-color: #0dcb5a; /* 배경색 */
+    border-color: #0dcb5a; /* 테두리 색 */
     color: white; /* 체크 표시 색 */
 }
 
 /* 체크박스가 체크되었을 때 원형 박스 안에 체크 표시 추가 */
 .checkbox-container input[type="checkbox"]:checked + .round-checkbox::after {
-    content: '✔'; /* 체크 표시 문자 */
-    display: inline-block;
-    font-size: 16px; /* 체크 표시 크기 */
 }
 
 /* 텍스트 스타일 */
@@ -377,18 +396,56 @@ main {
     align-items: center;
 }
 
+.meetLocation-title{
+	display:block;
+	font-weight: 600;
+	padding:15px 0;
+	font-size: 13px;
+}
+
+.meetLocation-add-box-con{
+	display: flex;
+	align-items: center;
+	background-color: #0dcb5a;
+    border-radius: 11px;
+    border: 1px solid #0dcb5a;
+}
+
+#meetLocation{
+	width:114px;
+	height: 35px;
+	padding: 5px; 
+	border: 0;
+	border-radius: 10px;
+}
+
 #locationConfirmButton {
-    width: 20px;
-    height: 100%;
+    width: 50px;
+    height: 35px;
+    margin-left:1px;
     padding: 0; /* 패딩 없애기 */
-    margin: 0; /* 마진 없애기 */
     border-radius: 4px;
-    background-color: #ddd;
+    background-color: #0dcb5a;
+    border:1px solid #0dcb5a;
     cursor: pointer;
+    font-weight: 600;
+    color:white;
+    border-radius: 10px;
 }
 
 #locationOutput {
-    margin-top: 10px;
+	padding: 0 13px;
+	height:35px;
+	background-color:#e0e0e0;
+	border:1px solid #e0e0e0;
+	border-radius:10px;
+	margin-left: 15px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	display: none;
+	font-size: 12px;
+	font-weight: 600;
 }
 
 #deleteLocation {
@@ -402,26 +459,28 @@ main {
 
 /* 등록 박스 스타일 */
 .register-box {
-    width: 130px; /* 너비 130px */
+    width: 180px; /* 너비 130px */
     height: auto; /* 높이는 자동 조절 */
-    font-size: 25px; /* 폰트 크기 */
-    margin: 20px auto; /* 위쪽 여백 20px, 아래쪽 여백 자동으로 설정하여 가운데 정렬 */
+    font-size: 22px; /* 폰트 크기 */
+    margin: 35px auto; /* 위쪽 여백 20px, 아래쪽 여백 자동으로 설정하여 가운데 정렬 */
     text-align: center; /* 텍스트 중앙 정렬 */
-    padding: 10px; /* 박스 내부 패딩 */
-    background-color: #007bff; /* 기본 배경 색상 */
+    padding: 13px; /* 박스 내부 패딩 */
+    background-color: #212121; /* 기본 배경 색상 */
     color: white; /* 기본 텍스트 색상 */
     border-radius: 5px; /* 둥근 모서리 */
     cursor: pointer; /* 클릭 커서 */
-    transition: background-color 0.3s ease, transform 0.1s ease;
+    transition: background-color 0.5s ease;
 }
 
 /* 마우스를 등록 상자에 올렸을 때 스타일 */
 .register-box:hover {
-    background-color: #333; /* 배경 색상 검게 변경 */
+    background-color: #3a3a3a; /* 배경 색상 검게 변경 */
 }
 
-/* 클릭했을 때 스타일 */
-.register-box:active {
-    transform: scale(0.98); /* 살짝 눌리는 효과 */
-    background-color: #111; /* 배경 색상을 더 어둡게 변경 */
+.advertising-container img{
+	padding: 65px 0 0;
+	width:100%;
 }
+
+
+
